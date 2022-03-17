@@ -1,0 +1,227 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Market API",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://api.eurus.lk",
+            "description": ""
+        }
+    ],
+    "paths": {
+        "/ping": {
+            "description": "",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ServerTime"
+                                }
+                            }
+                        },
+                        "description": "Return Service Ping"
+                    }
+                },
+                "summary": "Pings the service"
+            }
+        },
+        "/currencies": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Currency"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "List of Currencies"
+                    }
+                },
+                "summary": "List of currencies"
+            }
+        },
+        "/currencies/{symbol}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Currency"
+                                }
+                            }
+                        },
+                        "description": "Retrieve info on a specified currency"
+                    }
+                },
+                "summary": "Retrieve info on a specified currency"
+            },
+            "parameters": [
+                {
+                    "name": "symbol",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/markets/{symbol}/ticker": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Ticker"
+                                }
+                            }
+                        },
+                        "description": "Sends a message with the best bid and ask price for the given market as well as the last trade price whenever there is a relevant change to the order book or a trade."
+                    }
+                },
+                "description": "Sends a message with the best bid and ask price for the given market as well as the last trade price whenever there is a relevant change to the order book or a trade."
+            },
+            "parameters": [
+                {
+                    "name": "symbol",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        }
+    },
+    "components": {
+        "schemas": {
+            "Currency": {
+                "title": "Root Type for currency",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "symbol": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "coinType": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "minConfirmations": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "notice": {
+                        "type": "string"
+                    },
+                    "txFee": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "logoUrl": {
+                        "type": "string"
+                    },
+                    "prohibitedIn": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "baseAddress": {
+                        "type": "string"
+                    },
+                    "associatedTermsOfService": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "example": {
+                    "symbol": "string",
+                    "name": "string",
+                    "coinType": "string",
+                    "status": "string",
+                    "minConfirmations": "integer (int32)",
+                    "notice": "string",
+                    "txFee": "number (double)",
+                    "logoUrl": "string",
+                    "prohibitedIn": [
+                        "string"
+                    ],
+                    "baseAddress": "string",
+                    "associatedTermsOfService": [
+                        "string"
+                    ],
+                    "tags": [
+                        "string"
+                    ]
+                }
+            },
+            "ServerTime": {
+                "title": "Root Type for serverTime",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "serverTime": {
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "example": {
+                    "serverTime": "integer (int64)"
+                }
+            },
+            "Ticker": {
+                "title": "Root Type for ticker",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "symbol": {
+                        "type": "string"
+                    },
+                    "lastTradeRate": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "bidRate": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "askRate": {
+                        "format": "double",
+                        "type": "number"
+                    }
+                },
+                "example": {
+                    "symbol": "string",
+                    "lastTradeRate": "number (double)",
+                    "bidRate": "number (double)",
+                    "askRate": "number (double)"
+                }
+            }
+        }
+    }
+}
