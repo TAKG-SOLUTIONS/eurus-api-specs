@@ -51,3 +51,72 @@ As an example, imagine Place an Order -> create new resource
 ```http
 POST http://localhost:7082/api/orders
 ```
+The response would be something like:
+
+```http
+201 Created
+Location: http://localhost:7082/api/orders
+```
+#### 4.4.2. PATCH
+PATCH has been standardized by IETF as the method to be used for updating an existing object incrementally . EURUS REST API Guidelines compliant APIs SHOULD support PATCH.
+suppose the original resource has the following JSON representation:
+```json
+{
+    "name":"gizmo",
+    "category":"widgets",
+    "color":"blue",
+    "price":10
+}
+```
+As an example, imagine Place an user -> make a partial update
+```http
+HTTP PATCH http://localhost:7082/api//user/0001
+[{
+    "name":"gizmo",
+    "category":"widgets",
+    "color":"blue",
+    "price":10
+}]
+```
+Here is a possible JSON merge patch for this resource:
+```json
+{
+    "price":12,
+    "color":null,
+    "size":"small"
+}
+```
+The response would be something like:
+
+```http
+202 Accepted
+Location: http://localhost:7082/api/orders
+```
+#### 4.4.3. GET
+In HTTP, response format SHOULD be requested by the client using the Accept header. This is a hint, and the server MAY ignore it if it chooses to, even if this isn't typical of well-behaved servers. Clients MAY send multiple Accept headers and the service MAY choose one of them.
+
+```http
+GET http://localhost:7082/api//user
+Accept: application/json
+```
+
+The response would be something like:
+
+```http
+200 Ok
+Location: http://localhost:7082/api/orders
+```
+
+#### 4.4.4. DELETE
+If the delete operation is successful, the web server should respond with HTTP status code 204 (No Content), indicating that the process has been successfully handled, but that the response body contains no further information. If the resource doesn't exist, the web server can return HTTP 404 (Not Found).
+
+As an example, imagine Place an Order -> Delete 001 resource
+```http
+DELETE  http://localhost:7082/api/orders/001
+```
+
+The response would be something like:
+```http
+204 No Content
+Location: http://localhost:7082/api/orders
+```
