@@ -44,7 +44,7 @@ DELETE	|Delete an object
 PATCH	  |Apply a partial update to an object
 
 <small>Table 1</small>
-#### 4.4.1. POST
+#### 4.1.1. POST
 POST operations SHOULD support the Location response header to specify the location of any created resource that was not explicitly named, via the Location header.
 As an example, imagine Place an Order -> create new resource
 
@@ -57,7 +57,7 @@ The response would be something like:
 201 Created
 Location: http://localhost:7082/api/orders
 ```
-#### 4.4.2. PATCH
+#### 4.1.2. PATCH
 PATCH has been standardized by IETF as the method to be used for updating an existing object incrementally . EURUS REST API Guidelines compliant APIs SHOULD support PATCH.
 suppose the original resource has the following JSON representation:
 ```json
@@ -92,7 +92,7 @@ The response would be something like:
 202 Accepted
 Location: http://localhost:7082/api/orders
 ```
-#### 4.4.3. GET
+#### 4.1.3. GET
 In HTTP, response format SHOULD be requested by the client using the Accept header. This is a hint, and the server MAY ignore it if it chooses to, even if this isn't typical of well-behaved servers. Clients MAY send multiple Accept headers and the service MAY choose one of them.
 
 ```http
@@ -107,7 +107,7 @@ The response would be something like:
 Location: http://localhost:7082/api/orders
 ```
 
-#### 4.4.4. DELETE
+#### 4.1.4. DELETE
 If the delete operation is successful, the web server should respond with HTTP status code 204 (No Content), indicating that the process has been successfully handled, but that the response body contains no further information. If the resource doesn't exist, the web server can return HTTP 404 (Not Found).
 
 As an example, imagine Place an Order -> Delete 001 resource
@@ -120,3 +120,4 @@ The response would be something like:
 204 No Content
 Location: http://localhost:7082/api/orders
 ```
+#### 4.2. Error condition responses
