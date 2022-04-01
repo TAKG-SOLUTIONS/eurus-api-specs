@@ -121,3 +121,61 @@ The response would be something like:
 Location: http://localhost:7082/api/orders
 ```
 #### 4.2. Error condition responses
+For nonsuccess conditions, developers SHOULD be able to write one piece of code that handles errors consistently across different EURUS REST API Guidelines services. This allows building of simple and reliable infrastructure to handle exceptions as a separate flow from successful responses. The following is based on the  JSON spec.
+The error response MUST be a single JSON object. This object MUST have a name/value pair named "error." The value MUST be a JSON object.
+This object MUST contain name/value pairs with the names "code" and "message," and it MAY contain name/value pairs with the names "target," "details" and "innererror."
+The value for the "message" name/value pair MUST be a human-readable representation of the error.
+
+The value for the "target" name/value pair is the target of the particular error (e.g., the name of the property in error).
+The value for the "details" name/value pair MUST be an array of JSON objects that MUST contain name/value pairs for "code" and "message," and MAY contain a name/value pair for "target," as described above. The objects in the "details" array usually represent distinct, related errors that occurred during the request. 
+Error responses MAY contain annotations in any of their JSON objects.
+
+We recommend that for any transient errors that may be retried, services SHOULD include a Retry-After HTTP header indicating the minimum number of seconds that clients SHOULD wait before attempting the operation again.
+
+We recommend that for any transient errors that may be retried, services SHOULD include a Retry-After HTTP header indicating the minimum number of seconds that clients SHOULD wait before attempting the operation again.
+
+##### ErrorResponse : Object
+Property | Type | Required | Description
+-------- | ---- | -------- | -----------
+`error` | Error | ✔ | The error object.
+
+##### Error : Object
+Property | Type | Required | Description
+-------- | ---- | -------- | -----------
+`code` | String | ✔ | One of a server-defined set of error codes.
+`message` | String | ✔ | A human-readable representation of the error.
+`target` | String |  | The target of the error.
+`details` | Error[] |  | An array of details about specific errors that led to this reported error.
+`innererror` | InnerError |  | An object containing more specific information than the current object about the error.
+
+##### InnerError : Object
+Property | Type | Required | Description
+-------- | ---- | -------- | -----------
+`code` | String |  | A more specific error code than was provided by the containing error.
+`innererror` | InnerError |  | An object containing more specific information than the current object about the error.
+
+Example of "innererror":
+
+```json
+{
+  "error": {
+    "code": "BadArgument",
+    "message": "Previous passwords may not be reused",
+    "target": "password",
+    "innererror": {
+      "code": "PasswordError",
+      "innererror": {
+        "code": "PasswordDoesNotMeetPolicy",
+        "minLength": "6",
+        "maxLength": "64",
+        "characterTypes": ["lowerCase","upperCase","number","symbol"],
+        "minDistinctCharacterTypes": "2",
+        "innererror": {
+          "code": "PasswordReuseNotAllowed"
+        }
+      }
+    }
+  }
+}
+```
+### 7.11. HTTP Status Codes
