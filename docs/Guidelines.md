@@ -120,7 +120,7 @@ The response would be something like:
 204 No Content
 Location: http://localhost:7082/api/orders
 ```
-#### 4.2. Error condition responses
+### 4.2. Error condition responses
 For nonsuccess conditions, developers SHOULD be able to write one piece of code that handles errors consistently across different EURUS REST API Guidelines services. This allows building of simple and reliable infrastructure to handle exceptions as a separate flow from successful responses. The following is based on the  JSON spec.
 The error response MUST be a single JSON object. This object MUST have a name/value pair named "error." The value MUST be a JSON object.
 This object MUST contain name/value pairs with the names "code" and "message," and it MAY contain name/value pairs with the names "target," "details" and "innererror."
@@ -178,4 +178,23 @@ Example of "innererror":
   }
 }
 ```
-### 7.11. HTTP Status Codes
+### 4.3. HTTP Status Codes
+Standard HTTP Status Codes SHOULD be used; see the HTTP Status Code definitions for more information.
+
+### 4.4. Client library optional
+Developers MUST be able to develop on a wide variety of platforms and languages, such as Windows, Android,iso, C#, React.
+
+Services SHOULD be able to be accessed from simple HTTP tools such as curl without significant effort.
+
+## 5. CORS
+Services compliant with the Eurus REST API Guidelines MUST support [CORS (Cross Origin Resource Sharing)][cors].
+Services SHOULD support an allowed origin of CORS * and enforce authorization through valid OAuth tokens.
+Services SHOULD NOT support user credentials with origin validation.
+There MAY be exceptions for special cases.
+
+### 5.1. Client guidance
+Web developers usually don't need to do anything special to take advantage of CORS. All of the handshake steps happen invisibly as part of the standard XMLHttpRequest calls they make.
+
+Many other platforms, such as .NET, have integrated support for CORS.
+
+## 6. Collections
