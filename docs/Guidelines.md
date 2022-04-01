@@ -19,6 +19,18 @@ This document establishes the guidelines EURUS APIs SHOULD follow so RESTful int
 - [1. Abstract](#1-abstract)
 - [2. Table of contents](#2-table-of-contents)
 - [3. Introduction](#3-introduction)
+- [4.Consistency fundamentals](#4-consistency-fundamentals)
+    - [4.1. Supported methods](#41-supported-methods)
+      - [4.4.1. POST](#441-post)
+      - [4.4.2. PATCH](#442-patch)
+      - [4.4.3. GET](#443-GET)
+      - [4.4.4. DELETE](#444-DELETE)
+    -[4.2. Error condition responses](#42-error-condition-responses)
+    - [4.3. HTTP Status Codes](#43-http-status-codes)
+    - [4.4. Client library optional](#44-client-library-optional)
+- [5. CORS](#5-cors)
+    - [5.1. Client guidance](#51-client-guidance)
+- [6. Collections](#6-collections)
 <!-- /TOC -->
 ## 3. Introduction 
 Developers access most our Platform resources via HTTP interfaces. Although each service typically provides language-specific frameworks to wrap their APIs, all of their operations eventually boil down to HTTP requests. we must support a wide range of clients and services and cannot rely on rich frameworks being available for every development environment. Thus a goal of these guidelines is to ensure our APIs can be easily and consistently consumed by any client with basic HTTP support.
@@ -42,8 +54,8 @@ GET	    |Return the current value of an object
 POST	  |Create a new object based on the data provided, or submit a command
 DELETE	|Delete an object
 PATCH	  |Apply a partial update to an object
-
 <small>Table 1</small>
+
 #### 4.1.1. POST
 POST operations SHOULD support the Location response header to specify the location of any created resource that was not explicitly named, via the Location header.
 As an example, imagine Place an Order -> create new resource
@@ -138,6 +150,7 @@ We recommend that for any transient errors that may be retried, services SHOULD 
 Property | Type | Required | Description
 -------- | ---- | -------- | -----------
 `error` | Error | ✔ | The error object.
+<small>Table 2</small>
 
 ##### Error : Object
 Property | Type | Required | Description
@@ -147,13 +160,14 @@ Property | Type | Required | Description
 `target` | String |  | The target of the error.
 `details` | Error[] |  | An array of details about specific errors that led to this reported error.
 `innererror` | InnerError |  | An object containing more specific information than the current object about the error.
+<small>Table 3</small>
 
 ##### InnerError : Object
 Property | Type | Required | Description
 -------- | ---- | -------- | -----------
 `code` | String |  | A more specific error code than was provided by the containing error.
 `innererror` | InnerError |  | An object containing more specific information than the current object about the error.
-
+<small>Table 4</small>
 Example of "innererror":
 
 ```json
