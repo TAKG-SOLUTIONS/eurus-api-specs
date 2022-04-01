@@ -5,7 +5,7 @@
 Name | Name | Name |
 ---------------------------- | -------------------------------------- | ----------------------------------------
 ruchira	                     |sumihiran	                              |   Anuda
-gihan	                       |Nimna	                                  |Anjelo
+gihan	                     |Nimna	                                  |Anjelo
 
 <div style="font-size:150%">
 Document editor: Anjelo <br/>
@@ -21,11 +21,11 @@ This document establishes the guidelines EURUS APIs SHOULD follow so RESTful int
 - [3. Introduction](#3-introduction)
 - [4.Consistency fundamentals](#4-consistency-fundamentals)
     - [4.1. Supported methods](#41-supported-methods)
-      - [4.4.1. POST](#441-post)
-      - [4.4.2. PATCH](#442-patch)
-      - [4.4.3. GET](#443-GET)
-      - [4.4.4. DELETE](#444-DELETE)
-    -[4.2. Error condition responses](#42-error-condition-responses)
+      - [4.1.1. POST](#411-post)
+      - [4.1.2. PATCH](#412-patch)
+      - [4.1.3. GET](#413-get)
+      - [4.1.4. DELETE](#414-delete)
+    - [4.2. Error condition responses](#42-error-condition-responses)
     - [4.3. HTTP Status Codes](#43-http-status-codes)
     - [4.4. Client library optional](#44-client-library-optional)
 - [5. CORS](#5-cors)
