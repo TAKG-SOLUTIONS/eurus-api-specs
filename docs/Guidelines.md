@@ -54,6 +54,7 @@ GET	    |Return the current value of an object
 POST	  |Create a new object based on the data provided, or submit a command
 DELETE	|Delete an object
 PATCH	  |Apply a partial update to an object
+
 <small>Table 1</small>
 
 #### 4.1.1. POST
@@ -150,6 +151,7 @@ We recommend that for any transient errors that may be retried, services SHOULD 
 Property | Type | Required | Description
 -------- | ---- | -------- | -----------
 `error` | Error | ✔ | The error object.
+
 <small>Table 2</small>
 
 ##### Error : Object
@@ -160,6 +162,7 @@ Property | Type | Required | Description
 `target` | String |  | The target of the error.
 `details` | Error[] |  | An array of details about specific errors that led to this reported error.
 `innererror` | InnerError |  | An object containing more specific information than the current object about the error.
+
 <small>Table 3</small>
 
 ##### InnerError : Object
@@ -167,7 +170,9 @@ Property | Type | Required | Description
 -------- | ---- | -------- | -----------
 `code` | String |  | A more specific error code than was provided by the containing error.
 `innererror` | InnerError |  | An object containing more specific information than the current object about the error.
+
 <small>Table 4</small>
+
 Example of "innererror":
 
 ```json
