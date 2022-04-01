@@ -8,7 +8,7 @@ ruchira	                     |sumihiran	                              |   Anuda
 gihan	                       |Nimna	                                  |Anjelo
 
 <div style="font-size:150%">
-Document editors: Anjelo <br/>
+Document editor: Anjelo <br/>
 </div>
 
 ## 1. Abstract
