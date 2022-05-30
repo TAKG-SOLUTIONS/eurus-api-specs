@@ -1,4 +1,4 @@
-# Eurus-api-specs Guidelines V-0.1
+# Eurus-api-specs Guidelines V-1.0.0 < 1.0.1
 
 ##  EURUS REST API Guidelines Working Group
 
